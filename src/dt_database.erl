@@ -63,11 +63,7 @@ set_node_down(Node, NodeList, DownList) ->
 		false -> {NodeList, DownList};
 		true ->
 			{
-				lists:dropwhile(
-					fun(NodeElem) ->
-						NodeElem =:= Node
-					end,
-					NodeList),
+				lists:delete(Node, NodeList),
 				DownList++[Node]
 			}
 	end.
@@ -78,11 +74,7 @@ set_node_up(Node, NodeList, DownList) ->
 		true ->
 			{
 				NodeList++[Node],
-				lists:dropwhile(
-					fun(NodeElem) ->
-						NodeElem =:= Node
-					end,
-					DownList)
+				lists:delete(Node, DownList)
 			}
 	end.
 
